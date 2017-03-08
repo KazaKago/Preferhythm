@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.kazakago.quickpref.PrefManager;
-
 import javax.annotation.Nonnull;
 
 /**

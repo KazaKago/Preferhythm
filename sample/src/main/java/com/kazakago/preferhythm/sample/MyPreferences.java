@@ -1,7 +1,7 @@
 package com.kazakago.preferhythm.sample;
 
-import com.kazakago.quickpref.PrefKey;
-import com.kazakago.quickpref.PrefName;
+import com.kazakago.preferhythm.PrefKey;
+import com.kazakago.preferhythm.PrefName;
 
 import java.util.Set;
 

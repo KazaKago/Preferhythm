@@ -3,10 +3,6 @@ package com.kazakago.preferhythm;
 import android.content.Context;
 
 import com.google.auto.service.AutoService;
-import com.kazakago.quickpref.BasePrefManager;
-import com.kazakago.quickpref.PrefKey;
-import com.kazakago.quickpref.PrefName;
-import com.kazakago.quickpref.SharedPreferencesWrapper;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
