@@ -1,4 +1,4 @@
-package com.kazakago.quickpref;
+package com.kazakago.preferhythm;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

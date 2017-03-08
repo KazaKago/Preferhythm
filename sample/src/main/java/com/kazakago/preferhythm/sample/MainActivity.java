@@ -1,7 +1,10 @@
-package com.kazakago.quickpref.sample;
+package com.kazakago.preferhythm.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.kazakago.quickpref.sample.MyPreferencesManager;
+import com.kazakago.quickpref.sample.R;
 
 public class MainActivity extends AppCompatActivity {
 

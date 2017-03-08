@@ -1,4 +1,4 @@
-package com.kazakago.quickpref;
+package com.kazakago.preferhythm;
 
 import android.content.SharedPreferences;
 

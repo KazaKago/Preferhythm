@@ -1,4 +1,4 @@
-package com.kazakago.quickpref.sample;
+package com.kazakago.preferhythm.sample;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.kazakago.quickpref;
+package com.kazakago.preferhythm;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

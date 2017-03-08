@@ -1,8 +1,10 @@
-package com.kazakago.quickpref;
+package com.kazakago.preferhythm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.kazakago.quickpref.PrefManager;
 
 import javax.annotation.Nonnull;
 
@@ -14,7 +16,6 @@ import javax.annotation.Nonnull;
 public abstract class BasePrefManager implements PrefManager {
 
     protected final Context context;
-    protected String prefName;
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
 
@@ -22,10 +23,16 @@ public abstract class BasePrefManager implements PrefManager {
         this.context = context;
     }
 
+    protected abstract String getPrefName();
+
+    protected int getMode() {
+        return Context.MODE_PRIVATE;
+    }
+
     @Nonnull
     @Override
     public SharedPreferences getSharedPreferences() {
-        if (sharedPreferences == null) sharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        if (sharedPreferences == null) sharedPreferences = context.getSharedPreferences(getPrefName(), getMode());
         return sharedPreferences;
     }
 
@@ -53,6 +60,5 @@ public abstract class BasePrefManager implements PrefManager {
     public boolean commit() {
         return getEditor().commit();
     }
-
 
 }
