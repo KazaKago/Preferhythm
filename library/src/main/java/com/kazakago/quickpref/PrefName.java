@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
  * Created by tamura_k on 2017/03/08.
  */
 @Target(ElementType.TYPE)
-public @interface Loggable {
+public @interface PrefName {
 }
