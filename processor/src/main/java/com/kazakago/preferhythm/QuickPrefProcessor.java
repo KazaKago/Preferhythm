@@ -118,13 +118,13 @@ public class QuickPrefProcessor extends AbstractProcessor {
                 if (fieldType.equals(TypeName.INT) || fieldType.equals(TypeName.INT.box())) {
                     methodNameParam = "Int";
                     defaultValue = "0";
-                } else if (fieldType.equals(TypeName.LONG) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.LONG) || fieldType.equals(TypeName.LONG.box())) {
                     methodNameParam = "Long";
                     defaultValue = "0";
-                } else if (fieldType.equals(TypeName.FLOAT) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.FLOAT) || fieldType.equals(TypeName.FLOAT.box())) {
                     methodNameParam = "Float";
                     defaultValue = "0";
-                } else if (fieldType.equals(TypeName.BOOLEAN) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.BOOLEAN) || fieldType.equals(TypeName.BOOLEAN.box())) {
                     methodNameParam = "Boolean";
                     defaultValue = "false";
                 } else if (fieldType.equals(TypeName.get(String.class))) {
@@ -202,11 +202,11 @@ public class QuickPrefProcessor extends AbstractProcessor {
                 String methodNameParam;
                 if (fieldType.equals(TypeName.INT) || fieldType.equals(TypeName.INT.box())) {
                     methodNameParam = "Int";
-                } else if (fieldType.equals(TypeName.LONG) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.LONG) || fieldType.equals(TypeName.LONG.box())) {
                     methodNameParam = "Long";
-                } else if (fieldType.equals(TypeName.FLOAT) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.FLOAT) || fieldType.equals(TypeName.FLOAT.box())) {
                     methodNameParam = "Float";
-                } else if (fieldType.equals(TypeName.BOOLEAN) || fieldType.equals(TypeName.INT.box())) {
+                } else if (fieldType.equals(TypeName.BOOLEAN) || fieldType.equals(TypeName.BOOLEAN.box())) {
                     methodNameParam = "Boolean";
                 } else if (fieldType.equals(TypeName.get(String.class))) {
                     methodNameParam = "String";

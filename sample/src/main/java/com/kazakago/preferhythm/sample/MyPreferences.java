@@ -2,8 +2,9 @@ package com.kazakago.preferhythm.sample;
 
 import com.kazakago.preferhythm.PrefClass;
 import com.kazakago.preferhythm.PrefField;
-import com.kazakago.preferhythm.PrefKeyName;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
@@ -14,21 +15,72 @@ import javax.annotation.Nonnull;
 @PrefClass
 public class MyPreferences {
 
+    @PrefField
+    int intPrimitive;
+    @PrefField
+    int intPrimitiveWithInit = 3;
+
+    @PrefField
+    long longPrimitive;
+    @PrefField
+    long longPrimitiveWithInit = 5L;
+
+    @PrefField
+    float floatPrimitive;
+    @PrefField
+    float floatPrimitiveWithInit = 5.0f;
+
+    @PrefField
+    boolean booleanPrimitive;
+    @PrefField
+    boolean booleanPrimitiveWithInit = true;
+
+    @PrefField
+    Integer intObject;
+    @PrefField
+    Integer intObjectWithInit = 9;
     @Nonnull
     @PrefField
-    @PrefKeyName("foooooooooooooo")
-    public String foo = "hogehoge";
+    Integer intObjectNonNull = 12;
+
     @PrefField
-    public int bar;
+    Long longObject;
     @PrefField
-    public Integer bar2;
+    Long longObjectWithInit = 15L;
+    @Nonnull
     @PrefField
-    public Long longTest;
+    Long longObjectNonNull = 12L;
+
     @PrefField
-    public long longTest2;
+    Float floatObject;
     @PrefField
-    public Set<String> hugahuga;
+    Float floatObjectWithInit = 15.0f;
+    @Nonnull
     @PrefField
-    public Set<Long> aaaaaaaaaaaaa;
+    Float floatObjectNonNull = 12.0f;
+
+    @PrefField
+    Boolean booleanObject;
+    @PrefField
+    Boolean booleanObjectWithInit = true;
+    @Nonnull
+    @PrefField
+    Boolean booleanObjectNonNull = true;
+
+    @PrefField
+    String stringObject;
+    @PrefField
+    String stringObjectWithInit = "foo";
+    @Nonnull
+    @PrefField
+    String stringObjectNonNull = "bar";
+
+    @PrefField
+    Set<String> stringSetObject;
+    @PrefField
+    Set<String> stringSetObjectWithInit = new HashSet<>(Arrays.asList("foo", "bar"));
+    @Nonnull
+    @PrefField
+    Set<String> stringSetObjectNonNull = new HashSet<>(Arrays.asList("foo", "bar"));
 
 }
