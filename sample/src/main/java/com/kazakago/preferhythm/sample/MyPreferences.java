@@ -1,29 +1,34 @@
 package com.kazakago.preferhythm.sample;
 
-import com.kazakago.preferhythm.PrefKey;
-import com.kazakago.preferhythm.PrefName;
+import com.kazakago.preferhythm.PrefClass;
+import com.kazakago.preferhythm.PrefField;
+import com.kazakago.preferhythm.PrefKeyName;
 
 import java.util.Set;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by tamura_k on 2017/03/08.
  */
-@PrefName
+@PrefClass
 public class MyPreferences {
 
-    @PrefKey
-    public String foo;
-    @PrefKey
+    @Nonnull
+    @PrefField
+    @PrefKeyName("foooooooooooooo")
+    public String foo = "hogehoge";
+    @PrefField
     public int bar;
-    @PrefKey
+    @PrefField
     public Integer bar2;
-    @PrefKey
+    @PrefField
     public Long longTest;
-    @PrefKey
+    @PrefField
     public long longTest2;
-    @PrefKey
+    @PrefField
     public Set<String> hugahuga;
-    @PrefKey
+    @PrefField
     public Set<Long> aaaaaaaaaaaaa;
 
 }

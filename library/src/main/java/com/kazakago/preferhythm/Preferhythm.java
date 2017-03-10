@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
  *
  * @author Kensuke
  */
-public interface PrefManager {
+public interface Preferhythm {
 
     /**
      * SharedPreferencesを取得する
@@ -21,14 +21,14 @@ public interface PrefManager {
      *
      * @return
      */
-    SharedPreferences.Editor getEditor();
+    SharedPreferences.Editor getSharedPreferencesEditor();
 
     /**
      * 保存内容をクリアする
      *
      * @return
      */
-    PrefManager clear();
+    void clear();
 
     /**
      * 保存内容を確定する
