@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+def VERSION_CODE = 1
+def VERSION_NAME = "0.9.0"
 
 android {
     compileSdkVersion 25
@@ -7,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -17,6 +21,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+publish {
+    userOrg = 'kazakago'
+    groupId = 'com.kazakago.preferhythm'
+    artifactId = 'preferhythm'
+    publishVersion = VERSION_NAME
+    desc = "Generate Android's SharedPreferences related boilerplate code."
+    website = 'https://github.com/KazaKago/Preferhythm'
+    licences = ['MIT']
 }
 
 dependencies {

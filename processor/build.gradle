@@ -1,4 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
+
+def VERSION_NAME = "0.9.0"
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
@@ -9,6 +12,16 @@ sourceSets {
             srcDirs = ['src/main/java', '../library/src/main/java']
         }
     }
+}
+
+publish {
+    userOrg = 'kazakago'
+    groupId = 'com.kazakago.preferhythm'
+    artifactId = 'preferhythm-processor'
+    publishVersion = VERSION_NAME
+    desc = "Generate Android's SharedPreferences related boilerplate code."
+    website = 'https://github.com/KazaKago/Preferhythm'
+    licences = ['MIT']
 }
 
 dependencies {

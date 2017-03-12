@@ -19,7 +19,9 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
 /**
- * Created by tamura_k on 2017/03/08.
+ * Annotation processor class.
+ *
+ * Created by KazaKago on 2017/03/08.
  */
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({"com.kazakago.preferhythm.PrefClass", "com.kazakago.preferhythm.PrefField", "com.kazakago.preferhythm.PrefKeyName"})
