@@ -3,42 +3,47 @@ package com.kazakago.preferhythm;
 import android.content.SharedPreferences;
 
 /**
- * アプリ設定情報管理クラス
- *
- * @author Kensuke
+ * Preferhytm Interface.
+ * <p>
+ * Created by KazaKago on 2017/03/08.
  */
 public interface Preferhythm {
 
     /**
-     * SharedPreferencesを取得する
+     * Get SharedPreferences.
      *
-     * @return
+     * @return SharedPreferences
+     * @see SharedPreferences
      */
     SharedPreferences getSharedPreferences();
 
     /**
-     * SharedPreferences.Editorを取得する
+     * Get SharedPreferences.Editor.
      *
-     * @return
+     * @return SharedPreferences.Editor
+     * @see SharedPreferences.Editor
      */
     SharedPreferences.Editor getSharedPreferencesEditor();
 
     /**
-     * 保存内容をクリアする
+     * clear preferences.
      *
-     * @return
+     * @see SharedPreferences.Editor#clear()
      */
     void clear();
 
     /**
-     * 保存内容を確定する
+     * apply preferences.
+     *
+     * @see SharedPreferences.Editor#apply()
      */
     void apply();
 
     /**
-     * 保存内容を確定する
+     * commit preferences.
      *
-     * @return
+     * @return commit result.
+     * @see SharedPreferences.Editor#commit()
      */
     boolean commit();
 

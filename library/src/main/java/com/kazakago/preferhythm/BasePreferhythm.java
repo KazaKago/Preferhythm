@@ -8,9 +8,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * アプリ設定情報管理クラス
+ * Base preference management class implements Preferhytm.
  *
- * @author Kensuke
+ * Created by KazaKago on 2017/03/08.
  */
 public abstract class BasePreferhythm implements Preferhythm {
 
@@ -55,10 +55,20 @@ public abstract class BasePreferhythm implements Preferhythm {
         return getSharedPreferencesEditor().commit();
     }
 
+    /**
+     * Get SharedPreferences Mode.
+     *
+     * @return Context.MODE_...
+     */
     protected int getSharedPreferencesMode() {
         return Context.MODE_PRIVATE;
     }
 
+    /**
+     * Get SharedPreferences Name.
+     *
+     * @return Preferences filename.
+     */
     @Nonnull
     protected abstract String getSharedPreferencesName();
 

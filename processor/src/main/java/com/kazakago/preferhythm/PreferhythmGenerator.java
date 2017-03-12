@@ -26,7 +26,9 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.util.Elements;
 
 /**
- * Created by Kensuke on 2017/03/11.
+ * Preferences management class generator.
+ *
+ * Created by KazaKago on 2017/03/11.
  */
 public class PreferhythmGenerator {
 
@@ -43,24 +45,15 @@ public class PreferhythmGenerator {
         ClassName modelClassName = ClassName.get(packageName, element.getSimpleName().toString());
         ClassName generatedClassName = ClassName.get(packageName, element.getSimpleName().toString() + "Manager");
 
-        // モデルクラスフィールドの定義
         FieldSpec modelField = createModelField(modelClassName);
-        // コンストラクタの定義
         MethodSpec constructor = createConstructor();
-        // getSharedPreferencesNameメソッドの定義
         MethodSpec getPrefNameMethod = createGetPrefNameMethod(modelClassName);
-        // getメソッドの定義
         List<MethodSpec> getMethods = createGetMethods(element);
-        // getIsNullメソッドの定義
         List<MethodSpec> getIsNullMethods = createGetIsNullMethods(element);
-        // putメソッドの定義
         List<MethodSpec> putMethods = createPutMethods(element, generatedClassName);
-        // putIsNullメソッドの定義
         List<MethodSpec> putIsNullMethods = createPutIsNullMethods(element, generatedClassName);
-        // removeメソッドの定義
         List<MethodSpec> removeMethods = createRemoveMethods(element, generatedClassName);
 
-        // クラスの定義
         TypeSpec generatedClass = TypeSpec.classBuilder(generatedClassName)
                 .superclass(BasePreferhythm.class)
                 .addModifiers(Modifier.PUBLIC)
@@ -74,7 +67,6 @@ public class PreferhythmGenerator {
                 .addMethods(removeMethods)
                 .build();
 
-        // ファイルへ出力
         JavaFile.builder(packageName, generatedClass)
                 .build()
                 .writeTo(filer);
