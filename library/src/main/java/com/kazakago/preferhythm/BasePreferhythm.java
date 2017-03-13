@@ -3,36 +3,35 @@ package com.kazakago.preferhythm;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Base preference management class implements Preferhytm.
- *
+ * <p>
  * Created by KazaKago on 2017/03/08.
  */
 public abstract class BasePreferhythm implements Preferhythm {
 
-    @Nonnull
+    @NonNull
     protected final Context context;
     @Nullable
     protected SharedPreferences sharedPreferences;
     @Nullable
     protected SharedPreferences.Editor sharedPreferencesEditor;
 
-    public BasePreferhythm(@Nonnull Context context) {
+    public BasePreferhythm(@NonNull Context context) {
         this.context = context;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public SharedPreferences getSharedPreferences() {
         if (sharedPreferences == null) sharedPreferences = context.getSharedPreferences(getSharedPreferencesName(), getSharedPreferencesMode());
         return sharedPreferences;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     @SuppressLint("CommitPrefEdits")
     public SharedPreferences.Editor getSharedPreferencesEditor() {
@@ -69,7 +68,7 @@ public abstract class BasePreferhythm implements Preferhythm {
      *
      * @return Preferences filename.
      */
-    @Nonnull
+    @NonNull
     protected abstract String getSharedPreferencesName();
 
 }

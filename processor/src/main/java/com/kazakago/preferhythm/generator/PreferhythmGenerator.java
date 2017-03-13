@@ -1,7 +1,10 @@
-package com.kazakago.preferhythm;
+package com.kazakago.preferhythm.generator;
 
-import android.content.Context;
-
+import com.kazakago.preferhythm.PrefField;
+import com.kazakago.preferhythm.PrefKeyName;
+import com.kazakago.preferhythm.constants.Annotations;
+import com.kazakago.preferhythm.constants.Types;
+import com.kazakago.preferhythm.utils.AnnotationUtils;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -18,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -27,7 +28,7 @@ import javax.lang.model.util.Elements;
 
 /**
  * Preferences management class generator.
- *
+ * <p>
  * Created by KazaKago on 2017/03/11.
  */
 public class PreferhythmGenerator {
@@ -35,12 +36,12 @@ public class PreferhythmGenerator {
     private Filer filer;
     private Elements elements;
 
-    PreferhythmGenerator(Filer filer, Elements elements) {
+    public PreferhythmGenerator(Filer filer, Elements elements) {
         this.filer = filer;
         this.elements = elements;
     }
 
-    void execute(Element element) throws IOException {
+    public void execute(Element element) throws IOException {
         String packageName = elements.getPackageOf(element).getQualifiedName().toString();
         ClassName modelClassName = ClassName.get(packageName, element.getSimpleName().toString());
         ClassName generatedClassName = ClassName.get(packageName, element.getSimpleName().toString() + "Manager");
@@ -55,7 +56,7 @@ public class PreferhythmGenerator {
         List<MethodSpec> removeMethods = createRemoveMethods(element, generatedClassName);
 
         TypeSpec generatedClass = TypeSpec.classBuilder(generatedClassName)
-                .superclass(BasePreferhythm.class)
+                .superclass(Types.BasePreferhythm)
                 .addModifiers(Modifier.PUBLIC)
                 .addField(modelField)
                 .addMethod(constructor)
@@ -80,8 +81,8 @@ public class PreferhythmGenerator {
     }
 
     private MethodSpec createConstructor() {
-        ParameterSpec contextParameter = ParameterSpec.builder(Context.class, "context")
-                .addAnnotation(Nonnull.class)
+        ParameterSpec contextParameter = ParameterSpec.builder(Types.Context, "context")
+                .addAnnotation(Annotations.NonNull)
                 .build();
         return MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
@@ -93,7 +94,7 @@ public class PreferhythmGenerator {
     private MethodSpec createGetPrefNameMethod(ClassName modelClassName) {
         return MethodSpec.methodBuilder("getSharedPreferencesName")
                 .addModifiers(Modifier.PROTECTED)
-                .addAnnotation(Nonnull.class)
+                .addAnnotation(Annotations.NonNull)
                 .addAnnotation(Override.class)
                 .addStatement("return $S", modelClassName.simpleName())
                 .returns(String.class)
@@ -167,10 +168,10 @@ public class PreferhythmGenerator {
                             .addStatement("return modelInstance.$L", fieldName)
                             .endControlFlow()
                             .endControlFlow();
-                    if (el.getAnnotation(Nonnull.class) != null) {
-                        getMethodBuilder.addAnnotation(Nonnull.class);
+                    if (AnnotationUtils.hasNonNullAnnotation(el)) {
+                        getMethodBuilder.addAnnotation(Annotations.NonNull);
                     } else {
-                        getMethodBuilder.addAnnotation(Nullable.class);
+                        getMethodBuilder.addAnnotation(Annotations.Nullable);
                     }
                 }
                 MethodSpec getMethod = getMethodBuilder
@@ -192,12 +193,13 @@ public class PreferhythmGenerator {
                 PrefKeyName prefKeyNameAnnotation = el.getAnnotation(PrefKeyName.class);
                 String prefKeyName = (prefKeyNameAnnotation != null) ? prefKeyNameAnnotation.value() : fieldName;
                 MethodSpec.Builder getIsNullMethodBuilder = MethodSpec.methodBuilder("get" + StringUtils.capitalize(fieldName) + "IsNull");
-                if (fieldType.equals(TypeName.INT.box()) ||
+                if ((fieldType.equals(TypeName.INT.box()) ||
                         fieldType.equals(TypeName.LONG.box()) ||
                         fieldType.equals(TypeName.FLOAT.box()) ||
                         fieldType.equals(TypeName.BOOLEAN.box()) ||
                         fieldType.equals(TypeName.get(String.class)) ||
-                        fieldType.getClass().isInstance(ParameterizedTypeName.get(Set.class, String.class))) {
+                        fieldType.getClass().isInstance(ParameterizedTypeName.get(Set.class, String.class))) &&
+                        !fieldType.isPrimitive()) {
                     getIsNullMethodBuilder.addStatement("return getSharedPreferences().getBoolean($S, $L)", prefKeyName + "IsNull", false);
                 } else {
                     continue;
@@ -266,16 +268,16 @@ public class PreferhythmGenerator {
                             .addStatement("getSharedPreferencesEditor().remove($S)", prefKeyName)
                             .addStatement("put$LIsNull(true)", StringUtils.capitalize(fieldName))
                             .endControlFlow();
-                    if (el.getAnnotation(Nonnull.class) != null) {
-                        valueParameterBuilder.addAnnotation(Nonnull.class);
+                    if (AnnotationUtils.hasNonNullAnnotation(el)) {
+                        valueParameterBuilder.addAnnotation(Annotations.NonNull);
                     } else {
-                        valueParameterBuilder.addAnnotation(Nullable.class);
+                        valueParameterBuilder.addAnnotation(Annotations.Nullable);
                     }
                 }
                 ParameterSpec parameter = valueParameterBuilder.build();
                 MethodSpec putMethod = putMethodBuilder
                         .addModifiers(Modifier.PUBLIC)
-                        .addAnnotation(Nonnull.class)
+                        .addAnnotation(Annotations.NonNull)
                         .addParameter(parameter)
                         .addStatement("return this")
                         .returns(generatedClassName)
@@ -295,19 +297,20 @@ public class PreferhythmGenerator {
                 PrefKeyName prefKeyNameAnnotation = el.getAnnotation(PrefKeyName.class);
                 String prefKeyName = (prefKeyNameAnnotation != null) ? prefKeyNameAnnotation.value() : fieldName;
                 MethodSpec.Builder putMethodBuilder = MethodSpec.methodBuilder("put" + StringUtils.capitalize(fieldName) + "IsNull");
-                if (fieldType.equals(TypeName.INT.box()) ||
+                if ((fieldType.equals(TypeName.INT.box()) ||
                         fieldType.equals(TypeName.LONG.box()) ||
                         fieldType.equals(TypeName.FLOAT.box()) ||
                         fieldType.equals(TypeName.BOOLEAN.box()) ||
                         fieldType.equals(TypeName.get(String.class)) ||
-                        fieldType.getClass().isInstance(ParameterizedTypeName.get(Set.class, String.class))) {
+                        fieldType.getClass().isInstance(ParameterizedTypeName.get(Set.class, String.class))) &&
+                        !fieldType.isPrimitive()) {
                     putMethodBuilder.addStatement("getSharedPreferencesEditor().putBoolean($S, value)", prefKeyName + "IsNull");
                 } else {
                     continue;
                 }
                 MethodSpec putIsNullMethod = putMethodBuilder
                         .addModifiers(Modifier.PRIVATE)
-                        .addAnnotation(Nonnull.class)
+                        .addAnnotation(Annotations.NonNull)
                         .addParameter(boolean.class, "value")
                         .addStatement("return this")
                         .returns(generatedClassName)
@@ -343,7 +346,7 @@ public class PreferhythmGenerator {
                     continue;
                 }
                 MethodSpec removeMethod = removeMethodBuilder.addModifiers(Modifier.PUBLIC)
-                        .addAnnotation(Nonnull.class)
+                        .addAnnotation(Annotations.NonNull)
                         .addStatement("return this")
                         .returns(generatedClassName)
                         .build();
