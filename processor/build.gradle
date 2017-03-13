@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
 
-def VERSION_NAME = "1.0.0-SNAPSHOT"
+def VERSION_NAME = "0.9.1"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
