@@ -1,13 +1,13 @@
 package com.kazakago.preferhythm.samplejava;
 
+import android.support.annotation.NonNull;
+
 import com.kazakago.preferhythm.PrefClass;
 import com.kazakago.preferhythm.PrefField;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.annotation.Nonnull;
 
 /**
  * Created by tamura_k on 2017/03/08.
@@ -39,7 +39,7 @@ class MyPreferences {
     Integer intObject;
     @PrefField
     Integer intObjectWithInit = 9;
-    @Nonnull
+    @NonNull
     @PrefField
     Integer intObjectNonNull = 12;
 
@@ -47,7 +47,7 @@ class MyPreferences {
     Long longObject;
     @PrefField
     Long longObjectWithInit = 15L;
-    @Nonnull
+    @NonNull
     @PrefField
     Long longObjectNonNull = 12L;
 
@@ -55,7 +55,7 @@ class MyPreferences {
     Float floatObject;
     @PrefField
     Float floatObjectWithInit = 15.0f;
-    @Nonnull
+    @NonNull
     @PrefField
     Float floatObjectNonNull = 12.0f;
 
@@ -63,7 +63,7 @@ class MyPreferences {
     Boolean booleanObject;
     @PrefField
     Boolean booleanObjectWithInit = true;
-    @Nonnull
+    @NonNull
     @PrefField
     Boolean booleanObjectNonNull = true;
 
@@ -71,7 +71,7 @@ class MyPreferences {
     String stringObject;
     @PrefField
     String stringObjectWithInit = "foo";
-    @Nonnull
+    @NonNull
     @PrefField
     String stringObjectNonNull = "bar";
 
@@ -79,7 +79,7 @@ class MyPreferences {
     Set<String> stringSetObject;
     @PrefField
     Set<String> stringSetObjectWithInit = new HashSet<>(Arrays.asList("foo", "bar"));
-    @Nonnull
+    @NonNull
     @PrefField
     Set<String> stringSetObjectNonNull = new HashSet<>(Arrays.asList("foo", "bar"));
 

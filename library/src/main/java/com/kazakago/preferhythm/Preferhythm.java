@@ -1,6 +1,7 @@
 package com.kazakago.preferhythm;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 /**
  * Preferhytm Interface.
@@ -15,6 +16,7 @@ public interface Preferhythm {
      * @return SharedPreferences
      * @see SharedPreferences
      */
+    @NonNull
     SharedPreferences getSharedPreferences();
 
     /**
@@ -23,6 +25,7 @@ public interface Preferhythm {
      * @return SharedPreferences.Editor
      * @see SharedPreferences.Editor
      */
+    @NonNull
     SharedPreferences.Editor getSharedPreferencesEditor();
 
     /**

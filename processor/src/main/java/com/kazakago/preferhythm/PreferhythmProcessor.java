@@ -1,6 +1,7 @@
 package com.kazakago.preferhythm;
 
 import com.google.auto.service.AutoService;
+import com.kazakago.preferhythm.generator.PreferhythmGenerator;
 
 import java.io.IOException;
 import java.util.Set;

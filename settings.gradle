@@ -1,1 +1,1 @@
-include ':samplejava', ':library', ':processor', ':samplekotlin'
+include ':samplejava', ':library', ':processor', ':samplekotlin', ':annotations'
