@@ -13,6 +13,7 @@ Add the following gradle dependency exchanging x.x.x for the latest release.
 
 ```groovy
 compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
+annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
 ```
 
 ## Usage
