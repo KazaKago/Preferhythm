@@ -15,6 +15,20 @@ Add the following gradle dependency exchanging x.x.x for the latest release.
 compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
 annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
 ```
+## Supported Type
+
+- Primitive Type
+  - int
+  - long
+  - float
+  - boolean
+- Object Type
+  - Integer 
+  - Long
+  - Float
+  - Boolean
+  - String
+  - Set\<String\>
 
 ## Usage
 
