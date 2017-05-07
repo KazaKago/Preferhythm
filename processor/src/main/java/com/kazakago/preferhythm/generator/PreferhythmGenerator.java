@@ -156,7 +156,7 @@ public class PreferhythmGenerator {
                 String prefKeyName = (prefKeyNameAnnotation != null) ? prefKeyNameAnnotation.value() : fieldName;
                 MethodSpec.Builder getMethodBuilder = MethodSpec.methodBuilder("get" + StringUtils.capitalize(fieldName));
                 if (fieldType.isPrimitive()) {
-                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, modelInstance.$L)", fieldType, methodNameParam, prefKeyName, fieldName)
+                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, ($T) getReflectionField(modelInstance, $S))", fieldType, methodNameParam, prefKeyName, fieldType, fieldName)
                             .addStatement("return value");
                 } else {
                     getMethodBuilder.beginControlFlow("if (getSharedPreferences().contains($S))", prefKeyName)
@@ -165,7 +165,7 @@ public class PreferhythmGenerator {
                             .beginControlFlow("if (get$LIsNull())", StringUtils.capitalize(fieldName))
                             .addStatement("return null")
                             .nextControlFlow("else")
-                            .addStatement("return modelInstance.$L", fieldName)
+                            .addStatement("return ($T) getReflectionField(modelInstance, $S)", fieldType, fieldName)
                             .endControlFlow()
                             .endControlFlow();
                     if (AnnotationUtils.hasNonNullAnnotation(el)) {
