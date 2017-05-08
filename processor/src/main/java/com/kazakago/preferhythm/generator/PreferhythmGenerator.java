@@ -31,14 +31,10 @@ import javax.lang.model.util.Elements;
  * <p>
  * Created by KazaKago on 2017/03/11.
  */
-public class PreferhythmGenerator {
-
-    private Filer filer;
-    private Elements elements;
+public class PreferhythmGenerator extends CodeGenerator {
 
     public PreferhythmGenerator(Filer filer, Elements elements) {
-        this.filer = filer;
-        this.elements = elements;
+        super(filer, elements);
     }
 
     public void execute(Element element) throws IOException {
@@ -154,9 +150,15 @@ public class PreferhythmGenerator {
                 String fieldName = el.getSimpleName().toString();
                 PrefKeyName prefKeyNameAnnotation = el.getAnnotation(PrefKeyName.class);
                 String prefKeyName = (prefKeyNameAnnotation != null) ? prefKeyNameAnnotation.value() : fieldName;
+                String fieldAccessor;
+                if (el.getModifiers().contains(Modifier.PRIVATE)) {
+                    fieldAccessor = String.format("get%s()", StringUtils.capitalize(fieldName));
+                } else {
+                    fieldAccessor = fieldName;
+                }
                 MethodSpec.Builder getMethodBuilder = MethodSpec.methodBuilder("get" + StringUtils.capitalize(fieldName));
                 if (fieldType.isPrimitive()) {
-                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, modelInstance.$L)", fieldType, methodNameParam, prefKeyName, fieldName)
+                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, modelInstance.$L)", fieldType, methodNameParam, prefKeyName, fieldAccessor)
                             .addStatement("return value");
                 } else {
                     getMethodBuilder.beginControlFlow("if (getSharedPreferences().contains($S))", prefKeyName)
@@ -165,7 +167,7 @@ public class PreferhythmGenerator {
                             .beginControlFlow("if (get$LIsNull())", StringUtils.capitalize(fieldName))
                             .addStatement("return null")
                             .nextControlFlow("else")
-                            .addStatement("return modelInstance.$L", fieldName)
+                            .addStatement("return modelInstance.$L", fieldAccessor)
                             .endControlFlow()
                             .endControlFlow();
                     if (AnnotationUtils.hasNonNullAnnotation(el)) {
