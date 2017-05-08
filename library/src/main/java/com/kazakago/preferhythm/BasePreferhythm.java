@@ -71,21 +71,4 @@ public abstract class BasePreferhythm implements Preferhythm {
     @NonNull
     protected abstract String getSharedPreferencesName();
 
-    /**
-     * Get Field from Reflection.
-     *
-     * @param object
-     * @param fieldName
-     * @return
-     */
-    @Nullable
-    protected Object getReflectionField(Object object, String fieldName) {
-        try {
-            Class modelInstanceClass = object.getClass();
-            return modelInstanceClass.getField(fieldName).get(object);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
 }
