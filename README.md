@@ -7,6 +7,8 @@
 
 ## Requirement
 
+- Android 4.0.3 (API 15) or later
+
 ## Install
 
 Add the following gradle dependency exchanging x.x.x for the latest release.
@@ -31,6 +33,10 @@ annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
   - Set\<String\>
 
 ## Usage
+
+## Configurable
+
+## Kotlin Support
 
 ## License
 MIT License
