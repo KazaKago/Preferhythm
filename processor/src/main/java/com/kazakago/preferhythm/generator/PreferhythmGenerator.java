@@ -31,14 +31,10 @@ import javax.lang.model.util.Elements;
  * <p>
  * Created by KazaKago on 2017/03/11.
  */
-public class PreferhythmGenerator {
-
-    private Filer filer;
-    private Elements elements;
+public class PreferhythmGenerator extends CodeGenerator {
 
     public PreferhythmGenerator(Filer filer, Elements elements) {
-        this.filer = filer;
-        this.elements = elements;
+        super(filer, elements);
     }
 
     public void execute(Element element) throws IOException {
