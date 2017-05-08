@@ -19,6 +19,6 @@ abstract class CodeGenerator {
         this.elements = elements;
     }
 
-    abstract void execute(Element element) throws IOException;
+    public abstract void execute(Element element) throws IOException;
 
 }
