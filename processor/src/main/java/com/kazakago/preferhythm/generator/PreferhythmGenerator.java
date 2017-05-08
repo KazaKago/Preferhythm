@@ -154,9 +154,15 @@ public class PreferhythmGenerator {
                 String fieldName = el.getSimpleName().toString();
                 PrefKeyName prefKeyNameAnnotation = el.getAnnotation(PrefKeyName.class);
                 String prefKeyName = (prefKeyNameAnnotation != null) ? prefKeyNameAnnotation.value() : fieldName;
+                String fieldAccessor;
+                if (el.getModifiers().contains(Modifier.PRIVATE)) {
+                    fieldAccessor = String.format("get%s()", StringUtils.capitalize(fieldName));
+                } else {
+                    fieldAccessor = fieldName;
+                }
                 MethodSpec.Builder getMethodBuilder = MethodSpec.methodBuilder("get" + StringUtils.capitalize(fieldName));
                 if (fieldType.isPrimitive()) {
-                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, modelInstance.$L)", fieldType, methodNameParam, prefKeyName, fieldName)
+                    getMethodBuilder.addStatement("$T value = getSharedPreferences().get$L($S, modelInstance.$L)", fieldType, methodNameParam, prefKeyName, fieldAccessor)
                             .addStatement("return value");
                 } else {
                     getMethodBuilder.beginControlFlow("if (getSharedPreferences().contains($S))", prefKeyName)
@@ -165,7 +171,7 @@ public class PreferhythmGenerator {
                             .beginControlFlow("if (get$LIsNull())", StringUtils.capitalize(fieldName))
                             .addStatement("return null")
                             .nextControlFlow("else")
-                            .addStatement("return modelInstance.$L", fieldName)
+                            .addStatement("return modelInstance.$L", fieldAccessor)
                             .endControlFlow()
                             .endControlFlow();
                     if (AnnotationUtils.hasNonNullAnnotation(el)) {
