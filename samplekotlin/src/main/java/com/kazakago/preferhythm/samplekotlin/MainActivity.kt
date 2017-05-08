@@ -43,24 +43,29 @@ class MainActivity : AppCompatActivity() {
 
         val setButton2 = findViewById(R.id.button_set_2) as Button
         setButton2.setOnClickListener {
-            myPreferencesManager.putStringObjectWithInit(valueEditText2.text.toString())
+            myPreferencesManager.putStringObjectNonNull(valueEditText2.text.toString())
             myPreferencesManager.apply()
 
-            valueTextView2.text = myPreferencesManager.stringObjectWithInit
+            valueTextView2.text = myPreferencesManager.stringObjectNonNull
         }
         val removeButton2 = findViewById(R.id.button_remove_2) as Button
         removeButton2.setOnClickListener {
-            myPreferencesManager.removeStringObjectWithInit()
+            myPreferencesManager.removeStringObjectNonNull()
             myPreferencesManager.apply()
 
-            valueTextView2.text = myPreferencesManager.stringObjectWithInit
+            valueTextView2.text = myPreferencesManager.stringObjectNonNull
         }
-        valueTextView2.text = myPreferencesManager.stringObjectWithInit
+        valueTextView2.text = myPreferencesManager.stringObjectNonNull
 
         val setButton3 = findViewById(R.id.button_set_3) as Button
         setButton3.setOnClickListener {
-            myPreferencesManager.putIntObject(Integer.valueOf(valueEditText3.text.toString()))
-            myPreferencesManager.apply()
+            try {
+                myPreferencesManager.putIntObject(Integer.valueOf(valueEditText3.text.toString()))
+                myPreferencesManager.apply()
+            } catch (e: Exception) {
+                Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+            }
 
             valueTextView3.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObject)
         }
@@ -76,27 +81,22 @@ class MainActivity : AppCompatActivity() {
         val setButton4 = findViewById(R.id.button_set_4) as Button
         setButton4.setOnClickListener {
             try {
-                myPreferencesManager.putIntObjectWithInit(Integer.valueOf(valueEditText4.text.toString()))
+                myPreferencesManager.putIntObjectNonNull(Integer.valueOf(valueEditText4.text.toString()))
                 myPreferencesManager.apply()
-            } catch (e: ClassCastException) {
+            } catch (e: Exception) {
                 Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
 
-            valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectWithInit)
+            valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectNonNull)
         }
         val removeButton4 = findViewById(R.id.button_remove_4) as Button
         removeButton4.setOnClickListener {
-            try {
-                myPreferencesManager.removeIntObjectWithInit()
-                myPreferencesManager.apply()
-            } catch (e: ClassCastException) {
-                Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
-                e.printStackTrace()
-            }
+            myPreferencesManager.removeIntObjectNonNull()
+            myPreferencesManager.apply()
 
-            valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectWithInit)
+            valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectNonNull)
         }
-        valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectWithInit)
+        valueTextView4.text = String.format(Locale.getDefault(), "%d", myPreferencesManager.intObjectNonNull)
     }
 }

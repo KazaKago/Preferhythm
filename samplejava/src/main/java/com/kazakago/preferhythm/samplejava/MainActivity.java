@@ -57,32 +57,37 @@ public class MainActivity extends AppCompatActivity {
         setButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPreferencesManager.putStringObjectWithInit(valueEditText2.getText().toString());
+                myPreferencesManager.putStringObjectNonNull(valueEditText2.getText().toString());
                 myPreferencesManager.apply();
 
-                valueTextView2.setText(myPreferencesManager.getStringObjectWithInit());
+                valueTextView2.setText(myPreferencesManager.getStringObjectNonNull());
             }
         });
         Button removeButton2 = (Button) findViewById(R.id.button_remove_2);
         removeButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPreferencesManager.removeStringObjectWithInit();
+                myPreferencesManager.removeStringObjectNonNull();
                 myPreferencesManager.apply();
 
-                valueTextView2.setText(myPreferencesManager.getStringObjectWithInit());
+                valueTextView2.setText(myPreferencesManager.getStringObjectNonNull());
             }
         });
         valueTextView2 = (TextView) findViewById(R.id.text_value_2);
-        valueTextView2.setText(myPreferencesManager.getStringObjectWithInit());
+        valueTextView2.setText(myPreferencesManager.getStringObjectNonNull());
 
         valueEditText3 = (EditText) findViewById(R.id.edit_value_3);
         Button setButton3 = (Button) findViewById(R.id.button_set_3);
         setButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPreferencesManager.putIntObject(Integer.valueOf(valueEditText3.getText().toString()));
-                myPreferencesManager.apply();
+                try {
+                    myPreferencesManager.putIntObject(Integer.valueOf(valueEditText3.getText().toString()));
+                    myPreferencesManager.apply();
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
 
                 valueTextView3.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObject()));
             }
@@ -106,33 +111,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    myPreferencesManager.putIntObjectWithInit(Integer.valueOf(valueEditText4.getText().toString()));
+                    myPreferencesManager.putIntObjectNonNull(Integer.valueOf(valueEditText4.getText().toString()));
                     myPreferencesManager.apply();
-                } catch (ClassCastException e) {
+                } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
-                valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectWithInit()));
+                valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectNonNull()));
             }
         });
         Button removeButton4 = (Button) findViewById(R.id.button_remove_4);
         removeButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    myPreferencesManager.removeIntObjectWithInit();
-                    myPreferencesManager.apply();
-                } catch (ClassCastException e) {
-                    Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                myPreferencesManager.removeIntObjectNonNull();
+                myPreferencesManager.apply();
 
-                valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectWithInit()));
+                valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectNonNull()));
             }
         });
         valueTextView4 = (TextView) findViewById(R.id.text_value_4);
-        valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectWithInit()));
+        valueTextView4.setText(String.format(Locale.getDefault(), "%d", myPreferencesManager.getIntObjectNonNull()));
     }
 
 }
