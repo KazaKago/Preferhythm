@@ -13,10 +13,26 @@
 
 Add the following gradle dependency exchanging x.x.x for the latest release.
 
+### Java
+
 ```groovy
-compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
-annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
+dependencies {
+    compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
+    annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
+}
 ```
+
+### Kotlin
+
+```groovy
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
+    kapt 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
+}
+```
+
 ## Supported Type
 
 - Primitive Type
@@ -32,7 +48,48 @@ annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
   - String
   - Set\<String\>
 
+This is the same as Android's SharedPreferences specification. [More details](https://developer.android.com/training/basics/data-storage/shared-preferences.html).
+
+
 ## Usage
+
+```java
+@PrefClass
+class MyPreferences {
+
+    @PrefField
+    int intValue = 3;
+
+    @PrefField
+    boolean booleanPrimitiveWithInit = true;
+
+    @PrefField
+    String stringObject;
+
+}
+```
+
+```java
+public class MainActivity extends Activity {
+
+    //"MyPreferencesManager" class is auto generated.
+    private MyPreferencesManager myPreferencesManager = new MyPreferencesManager(this);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        System.out.print(myPreferencesManager.getIntValue()); // 3 (default value)
+
+        myPreferencesManager.putIntValue(100); // set 100
+        myPreferencesManager.commit(); // commit this change.
+
+        System.out.print(myPreferencesManager.getIntValue()); // 100
+    }
+
+}
+```
 
 ## Configurable
 
