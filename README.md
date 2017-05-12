@@ -5,6 +5,8 @@
 [![Bitrise](https://www.bitrise.io/app/436ed4113cb15072.svg?token=5I58EK088C0wp3UWmf75qA&branch=master)]()
 [![license](https://img.shields.io/github/license/kazakago/preferhythm.svg)](LICENSE.md)
 
+[TODO: 概要]
+
 ## Requirement
 
 - Android 4.0.3 (API 15) or later
@@ -53,6 +55,8 @@ This is the same as Android's SharedPreferences specification. [More details](ht
 
 ## Usage
 
+[TODO: モデルクラス構築方法]
+
 ```java
 @PrefClass // `@PrefClass` is nessesary for your preferences model class.
 class MyPreferences {
@@ -72,6 +76,8 @@ class MyPreferences {
 
 }
 ```
+
+[TODO: MainActivityでの使い方]
 
 ```java
 public class MainActivity extends Activity {
@@ -100,9 +106,29 @@ public class MainActivity extends Activity {
 }
 ```
 
-## Configurable
+## Advanced
+
+if you want to change Preferences name, extend [YOUR_PREFERENCES_MODEL_CLASS]Manager class and override getPreferencesName() method.
+
+```java
+public class CustomMyPreferencesManager extends MyPreferencesManager {
+
+    public CustomMyPreferencesManager(@NonNull Context context) {
+        super(context);
+    }
+
+    @NonNull
+    @Override
+    protected String getSharedPreferencesName() {
+        return "CUSTOM_SHARED_PREFERENCES_NAME";
+    }
+
+}
+```
 
 ## Kotlin Support
+
+[TODO: Kotlinサポート内容]
 
 ## License
 MIT License
