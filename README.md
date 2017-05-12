@@ -136,6 +136,28 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
 
 [TODO: Kotlinサポート内容]
 
+```kotlin
+@PrefClass
+class MyPreferences {
+
+    @PrefField
+    val intValue: Int = 3 // NonNull & default value is `3`.
+
+    @PrefField
+    val booleanValue: Boolean = false // NonNull & default value is `false`
+
+    @PrefField
+    val stringValue: String = "foo" // NonNull & default value is `foo`
+
+    @PrefField
+    val nullableStringValue: String? = null // Nullable & default value is `null`
+
+    @PrefField
+    val nullableStringWithInitValue: String? = "bar" // Nullable & default value is `bar`
+
+}
+```
+
 ## License
 MIT License
 
