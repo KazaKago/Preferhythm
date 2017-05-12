@@ -106,6 +106,8 @@ public class MainActivity extends Activity {
 }
 ```
 
+Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/master/samplejava) & [Kotlin](https://github.com/KazaKago/Preferhythm/tree/master/samplekotlin)) for details.
+
 ## Advanced
 
 if you want to change Preferences name, extend [YOUR_PREFERENCES_MODEL_CLASS]Manager class and override getPreferencesName() method.
