@@ -87,9 +87,14 @@ public class MainActivity extends Activity {
         System.out.print(myPreferencesManager.getIntValue()); // 3 (default value)
 
         myPreferencesManager.putIntValue(100); // set 100
-        myPreferencesManager.commit(); // commit this change.
+        myPreferencesManager.commit(); // commit change.
 
         System.out.print(myPreferencesManager.getIntValue()); // 100
+        
+        myPreferencesManager.clear(); // clear value.
+        myPreferencesManager.commit(); // commit change.
+
+        System.out.print(myPreferencesManager.getIntValue()); // 3 (default value)
     }
 
 }
