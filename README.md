@@ -108,6 +108,10 @@ public class MainActivity extends Activity {
 
 Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/master/samplejava) & [Kotlin](https://github.com/KazaKago/Preferhythm/tree/master/samplekotlin)) for details.
 
+## Important
+
+[TODO: 変数の名前でSharedPreferencesに保存されるので変数名を変更するとSharedPreferences上別の値として保存されるので注意]
+
 ## Advanced
 
 if you want to change Preferences name, extend `[PREFERENCES_MODEL_NAME] + Manager` class and override getPreferencesName() method.
