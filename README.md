@@ -110,7 +110,7 @@ Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/
 
 ## Advanced
 
-if you want to change Preferences name, extend [YOUR_PREFERENCES_MODEL_CLASS]Manager class and override getPreferencesName() method.
+if you want to change Preferences name, extend `[PREFERENCES_MODEL_NAME] + Manager` class and override getPreferencesName() method.
 
 ```java
 public class CustomMyPreferencesManager extends MyPreferencesManager {
