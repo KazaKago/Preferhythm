@@ -54,17 +54,21 @@ This is the same as Android's SharedPreferences specification. [More details](ht
 ## Usage
 
 ```java
-@PrefClass
+@PrefClass // `@PrefClass` is nessesary for your preferences model class.
 class MyPreferences {
 
-    @PrefField
-    int intValue = 3;
+    @PrefField // `@PrefField` is nessesary for your preference value.
+    int intValue = 3; // default value is `3`.
 
     @PrefField
-    boolean booleanPrimitiveWithInit = true;
+    boolean booleanValue; // default value is `false`. (primitive default value)
 
     @PrefField
-    String stringObject;
+    String stringValue; // default value is `null`.
+
+    @NonNull
+    @PrefField
+    String nonNullStringValue = "foo"; // NonNull annotation with default value.
 
 }
 ```
@@ -72,7 +76,7 @@ class MyPreferences {
 ```java
 public class MainActivity extends Activity {
 
-    //"MyPreferencesManager" class is auto generated.
+    // `MyPreferencesManager` class is auto generated.
     private MyPreferencesManager myPreferencesManager = new MyPreferencesManager(this);
 
     @Override
