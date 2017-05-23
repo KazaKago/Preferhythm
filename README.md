@@ -5,7 +5,7 @@
 [![Bitrise](https://www.bitrise.io/app/436ed4113cb15072.svg?token=5I58EK088C0wp3UWmf75qA&branch=master)]()
 [![license](https://img.shields.io/github/license/kazakago/preferhythm.svg)](LICENSE.md)
 
-[TODO: 概要]
+Automatically generate classes to use Android's SharedPreferences easily and safely.
 
 ## Requirement
 
@@ -79,7 +79,7 @@ class MyPreferences {
 ```
 
 When building, `[PREFERENCES_MODEL_NAME] + Manager` class is auto generated based on the class with `@PrefClass` annotation.  
-Also, Put and get methods are auto created based on the original field name with `@PrefFirld` annotation.  
+Also, Put and get methods are auto created based on the original field name with `@PrefField` annotation.  
 
 ```java
 public class MainActivity extends Activity {
