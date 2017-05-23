@@ -55,7 +55,8 @@ This is the same as Android's SharedPreferences specification. [More details](ht
 
 ## Usage
 
-[TODO: モデルクラス構築方法]
+Create a class for preference and add `@PrefClass` annotation.  
+Next, define variable for preference and add `@PrefField` annotation.
 
 ```java
 @PrefClass // `@PrefClass` is nessesary for your preferences model class.
@@ -77,7 +78,9 @@ class MyPreferences {
 }
 ```
 
-[TODO: MainActivityでの使い方]
+When building, a class for SharedPreference is auto generated based on the class with `@PrefClass` annotation.  
+This class name is `[ORIGINAL_CLASS_NAME] + Manager`.  
+Also, Put and get methods are auto created based on the original field name.  
 
 ```java
 public class MainActivity extends Activity {
@@ -114,6 +117,8 @@ Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/
 
 ## Advanced
 
+### Change Preferences Name.
+
 if you want to change Preferences name, extend `[PREFERENCES_MODEL_NAME] + Manager` class and override getPreferencesName() method.
 
 ```java
@@ -131,6 +136,10 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
 
 }
 ```
+
+### Override Put and Get Method.
+
+[TODO: Put Getメソッド上書きについて]
 
 ## Kotlin Support
 
