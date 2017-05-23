@@ -79,7 +79,7 @@ class MyPreferences {
 ```
 
 When building, a class for SharedPreference is auto generated based on the class with `@PrefClass` annotation.  
-This class name is `[ORIGINAL_CLASS_NAME] + Manager`.  
+This class name is `[ORIGINAL_CLASS_NAME] + Manager`.  
 Also, Put and get methods are auto created based on the original field name.  
 
 ```java
