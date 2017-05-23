@@ -55,8 +55,8 @@ This is the same as Android's SharedPreferences specification. [More details](ht
 
 ## Usage
 
-Create a class for preference and add `@PrefClass` annotation.  
-Next, define variable for preference and add `@PrefField` annotation.
+Create a preference model class and add `@PrefClass` annotation.  
+Next, define field variable and add `@PrefField` annotation.
 
 ```java
 @PrefClass // `@PrefClass` is nessesary for your preferences model class.
@@ -78,9 +78,8 @@ class MyPreferences {
 }
 ```
 
-When building, a class for SharedPreference is auto generated based on the class with `@PrefClass` annotation.  
-This class name is `[ORIGINAL_CLASS_NAME] + Manager`.  
-Also, Put and get methods are auto created based on the original field name.  
+When building, `[PREFERENCES_MODEL_NAME] + Manager` class is auto generated based on the class with `@PrefClass` annotation.  
+Also, Put and get methods are auto created based on the original field name with `@PrefFirld` annotation.  
 
 ```java
 public class MainActivity extends Activity {
