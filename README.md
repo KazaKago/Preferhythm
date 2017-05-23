@@ -130,7 +130,7 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
     @NonNull
     @Override
     protected String getSharedPreferencesName() {
-        return "CUSTOM_SHARED_PREFERENCES_NAME";
+        return "CUSTOM_SHARED_PREFERENCES_NAME"; // your custom preferences name. (if needed)
     }
 
 }
@@ -138,7 +138,37 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
 
 ### Override Put and Get Method.
 
-[TODO: Put Getメソッド上書きについて]
+you can override put and get method in `[PREFERENCES_MODEL_NAME] + Manager` class.
+
+```java
+public class CustomMyPreferencesManager extends MyPreferencesManager {
+
+    public CustomMyPreferencesManager(@NonNull Context context) {
+        super(context);
+    }
+    
+    @Nullable
+    @Override
+    public String getStringValue() {
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        return super.getStringValue();
+    }
+
+    @NonNull
+    @Override
+    public MyPreferencesManager putStringValue(@Nullable String value) {
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        // ### Your custom step. (if needed) ###
+        return super.putStringValue(value);
+    }
+
+}
+```
 
 ## Kotlin Support
 
