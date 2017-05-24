@@ -151,9 +151,8 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
     @Override
     public String getStringValue() {
         // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
+        // ...
+        // ###
         return super.getStringValue();
     }
 
@@ -161,9 +160,8 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
     @Override
     public MyPreferencesManager putStringValue(@Nullable String value) {
         // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
-        // ### Your custom step. (if needed) ###
+        // ...
+        // ###
         return super.putStringValue(value);
     }
 
