@@ -170,7 +170,7 @@ public class CustomMyPreferencesManager extends MyPreferencesManager {
 
 ## Kotlin Support
 
-[TODO: Kotlinサポート内容]
+This library supports Kotlin's Nullable.
 
 ```kotlin
 @PrefClass
