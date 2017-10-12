@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 /**
  * Preferhytm Interface.
  *
- *
  * Created by KazaKago on 2017/03/08.
  */
 interface Preferhythm {

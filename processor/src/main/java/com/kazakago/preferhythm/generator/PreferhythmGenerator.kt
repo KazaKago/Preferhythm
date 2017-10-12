@@ -17,7 +17,6 @@ import javax.lang.model.util.Elements
 /**
  * Preferences management class generator.
  *
- *
  * Created by KazaKago on 2017/03/11.
  */
 class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(filer, elements) {

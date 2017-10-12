@@ -4,7 +4,7 @@ import javax.lang.model.element.Element
 
 /**
  * Annotation related utility methods.
-
+ *
  * Created by KazaKago on 2017/03/14.
  */
 class AnnotationUtils {
