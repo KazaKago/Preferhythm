@@ -4,9 +4,6 @@ import com.kazakago.preferhythm.PrefClass
 import com.kazakago.preferhythm.PrefField
 import java.util.*
 
-/**
- * Created by tamura_k on 2017/03/08.
- */
 @PrefClass
 class MyPreferences {
 

@@ -9,9 +9,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by tamura_k on 2017/03/08.
- */
 @PrefClass
 class MyPreferences {
 
