@@ -2,7 +2,7 @@ Preferhythm
 ====
 
 [![Download](https://api.bintray.com/packages/kazakago/maven/preferhythm/images/download.svg)](https://bintray.com/kazakago/maven/preferhythm/_latestVersion)
-[![Bitrise](https://www.bitrise.io/app/436ed4113cb15072.svg?token=5I58EK088C0wp3UWmf75qA&branch=master)]()
+[![Build Status](https://www.bitrise.io/app/5ed0f7b8abbcdca8/status.svg?token=nX7BTDs-VibK-DfRC4jvNQ)](https://www.bitrise.io/app/5ed0f7b8abbcdca8)
 [![license](https://img.shields.io/github/license/kazakago/preferhythm.svg)](LICENSE.md)
 
 Automatically generate classes to use Android's SharedPreferences easily and safely.
