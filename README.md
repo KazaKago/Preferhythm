@@ -1,4 +1,4 @@
-[WIP]Preferhythm
+Preferhythm
 ====
 
 [![Download](https://api.bintray.com/packages/kazakago/maven/preferhythm/images/download.svg)](https://bintray.com/kazakago/maven/preferhythm/_latestVersion)
@@ -112,7 +112,22 @@ Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/
 
 ## Important
 
-[TODO: 変数の名前でSharedPreferencesに保存されるので変数名を変更するとSharedPreferences上別の値として保存されるので注意]
+By default, the key name when saving to SharedPreferences is **Field Name**.  
+Therefore, if you change the field name, the saved value can not be retrieved.  
+
+If you want to set the key name to an arbitrary value, please use `@PrefKeyName` annotation for the field.  
+
+```java
+@PrefClass
+class YourPreferencesClass {
+
+    @PrefField
+    @PrefKeyName("YOUR_ORIGINAL_KEY_NAME")
+    int yourSaveValue;
+
+}
+
+```
 
 ## Advanced
 
