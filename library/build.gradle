@@ -31,6 +31,11 @@ publish {
     licences = ['MIT']
 }
 
+afterEvaluate {
+    //To avoid making javadoc generation fail.
+    tasks.findByPath(":library:releaseAndroidJavadocs").enabled = false
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':annotations')
