@@ -1,7 +1,7 @@
 package com.kazakago.preferhythm.generator
 
+import com.kazakago.preferhythm.PrefClass
 import com.kazakago.preferhythm.PrefField
-import com.kazakago.preferhythm.PrefKeyName
 import com.kazakago.preferhythm.constants.Annotations
 import com.kazakago.preferhythm.constants.Types
 import com.kazakago.preferhythm.utils.AnnotationUtils
@@ -29,7 +29,7 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
 
         val modelField = createModelField(modelClassName)
         val constructor = createConstructor()
-        val getPrefNameMethod = createGetPrefNameMethod(modelClassName)
+        val getPrefNameMethod = createGetPrefNameMethod(element, modelClassName)
         val getMethods = createGetMethods(element)
         val getIsNullMethods = createGetIsNullMethods(element)
         val setMethods = createSetMethods(element, generatedClassName)
@@ -72,12 +72,14 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                 .build()
     }
 
-    private fun createGetPrefNameMethod(modelClassName: ClassName): MethodSpec {
+    private fun createGetPrefNameMethod(element: Element, modelClassName: ClassName): MethodSpec {
+        val prefClassAnnotation = element.getAnnotation(PrefClass::class.java)
+        val prefName = if (prefClassAnnotation.value.isNotBlank()) prefClassAnnotation.value else modelClassName.simpleName()
         return MethodSpec.methodBuilder("getSharedPreferencesName")
                 .addModifiers(Modifier.PUBLIC)
                 .addAnnotation(Annotations.NonNull)
                 .addAnnotation(Override::class.java)
-                .addStatement("return \$S", modelClassName.simpleName())
+                .addStatement("return \$S", prefName)
                 .returns(String::class.java)
                 .build()
     }
@@ -85,7 +87,8 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
     private fun createGetMethods(element: Element): List<MethodSpec> {
         val getMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
-            if (el.getAnnotation(PrefField::class.java) != null) {
+            val prefFieldAnnotation = el.getAnnotation(PrefField::class.java)
+            if (prefFieldAnnotation != null) {
                 var fieldType = ClassName.get(el.asType())
                 val methodNameParam: String
                 val defaultValue: String
@@ -133,8 +136,7 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                     continue
                 }
                 val fieldName = el.simpleName.toString()
-                val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
-                val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
+                val prefKeyName = if (prefFieldAnnotation.value.isNotBlank()) prefFieldAnnotation.value else fieldName
                 val fieldAccessor: String
                 if (el.modifiers.contains(Modifier.PRIVATE)) {
                     fieldAccessor = String.format("get%s()", StringUtils.capitalize(fieldName))
@@ -174,11 +176,11 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
     private fun createGetIsNullMethods(element: Element): List<MethodSpec> {
         val getIsNullMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
-            if (el.getAnnotation(PrefField::class.java) != null) {
+            val prefFieldAnnotation = el.getAnnotation(PrefField::class.java)
+            if (prefFieldAnnotation != null) {
                 val fieldName = el.simpleName.toString()
                 val fieldType = ClassName.get(el.asType())
-                val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
-                val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
+                val prefKeyName = if (prefFieldAnnotation.value.isNotBlank()) prefFieldAnnotation.value else fieldName
                 val getIsNullMethodBuilder = MethodSpec.methodBuilder("get" + StringUtils.capitalize(fieldName) + "IsNull")
                 if ((fieldType == TypeName.INT.box() ||
                         fieldType == TypeName.LONG.box() ||
@@ -203,7 +205,8 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
     private fun createSetMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
         val setMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
-            if (el.getAnnotation(PrefField::class.java) != null) {
+            val prefFieldAnnotation = el.getAnnotation(PrefField::class.java)
+            if (prefFieldAnnotation != null) {
                 var fieldType = ClassName.get(el.asType())
                 val methodNameParam: String
                 if (fieldType == TypeName.INT) {
@@ -240,8 +243,7 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                     continue
                 }
                 val fieldName = el.simpleName.toString()
-                val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
-                val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
+                val prefKeyName = if (prefFieldAnnotation.value.isNotBlank()) prefFieldAnnotation.value else fieldName
                 val setMethodBuilder = MethodSpec.methodBuilder("set" + StringUtils.capitalize(fieldName))
                 val valueParameterBuilder = ParameterSpec.builder(fieldType, "value")
                 if (fieldType.isPrimitive) {
@@ -277,11 +279,11 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
     private fun createSetIsNullMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
         val setIsNullMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
-            if (el.getAnnotation(PrefField::class.java) != null) {
+            val prefFieldAnnotation = el.getAnnotation(PrefField::class.java)
+            if (prefFieldAnnotation != null) {
                 val fieldName = el.simpleName.toString()
                 val fieldType = ClassName.get(el.asType())
-                val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
-                val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
+                val prefKeyName = if (prefFieldAnnotation.value.isNotBlank()) prefFieldAnnotation.value else fieldName
                 val setMethodBuilder = MethodSpec.methodBuilder("set" + StringUtils.capitalize(fieldName) + "IsNull")
                 if ((fieldType == TypeName.INT.box() ||
                         fieldType == TypeName.LONG.box() ||
@@ -309,11 +311,11 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
     private fun createRemoveMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
         val removeMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
-            if (el.getAnnotation(PrefField::class.java) != null) {
+            val prefFieldAnnotation = el.getAnnotation(PrefField::class.java)
+            if (prefFieldAnnotation != null) {
                 val fieldName = el.simpleName.toString()
                 val fieldType = ClassName.get(el.asType())
-                val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
-                val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
+                val prefKeyName = if (prefFieldAnnotation.value.isNotBlank()) prefFieldAnnotation.value else fieldName
                 val removeMethodBuilder = MethodSpec.methodBuilder("remove" + StringUtils.capitalize(fieldName))
                 if (fieldType == TypeName.INT ||
                         fieldType == TypeName.LONG ||

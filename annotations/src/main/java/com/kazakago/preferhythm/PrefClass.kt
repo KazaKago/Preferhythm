@@ -6,4 +6,4 @@ package com.kazakago.preferhythm
  * Created by KazaKago on 2017/03/08.
  */
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE)
-annotation class PrefClass
+annotation class PrefClass(val value: String = "")
