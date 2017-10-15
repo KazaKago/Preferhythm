@@ -32,8 +32,8 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
         val getPrefNameMethod = createGetPrefNameMethod(modelClassName)
         val getMethods = createGetMethods(element)
         val getIsNullMethods = createGetIsNullMethods(element)
-        val putMethods = createPutMethods(element, generatedClassName)
-        val putIsNullMethods = createPutIsNullMethods(element, generatedClassName)
+        val setMethods = createSetMethods(element, generatedClassName)
+        val setIsNullMethods = createSetIsNullMethods(element, generatedClassName)
         val removeMethods = createRemoveMethods(element, generatedClassName)
 
         val generatedClass = TypeSpec.classBuilder(generatedClassName)
@@ -44,8 +44,8 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                 .addMethod(getPrefNameMethod)
                 .addMethods(getMethods)
                 .addMethods(getIsNullMethods)
-                .addMethods(putMethods)
-                .addMethods(putIsNullMethods)
+                .addMethods(setMethods)
+                .addMethods(setIsNullMethods)
                 .addMethods(removeMethods)
                 .build()
 
@@ -200,8 +200,8 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
         return getIsNullMethods
     }
 
-    private fun createPutMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
-        val putMethods = ArrayList<MethodSpec>()
+    private fun createSetMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
+        val setMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
             if (el.getAnnotation(PrefField::class.java) != null) {
                 var fieldType = ClassName.get(el.asType())
@@ -242,17 +242,17 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                 val fieldName = el.simpleName.toString()
                 val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
                 val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
-                val putMethodBuilder = MethodSpec.methodBuilder("put" + StringUtils.capitalize(fieldName))
+                val setMethodBuilder = MethodSpec.methodBuilder("set" + StringUtils.capitalize(fieldName))
                 val valueParameterBuilder = ParameterSpec.builder(fieldType, "value")
                 if (fieldType.isPrimitive) {
-                    putMethodBuilder.addStatement("getSharedPreferencesEditor().put\$L(\$S, value)", methodNameParam, prefKeyName)
+                    setMethodBuilder.addStatement("getSharedPreferencesEditor().put\$L(\$S, value)", methodNameParam, prefKeyName)
                 } else {
-                    putMethodBuilder.beginControlFlow("if (value != null)")
+                    setMethodBuilder.beginControlFlow("if (value != null)")
                             .addStatement("getSharedPreferencesEditor().put\$L(\$S, value)", methodNameParam, prefKeyName)
-                            .addStatement("put\$LIsNull(false)", StringUtils.capitalize(fieldName))
+                            .addStatement("set\$LIsNull(false)", StringUtils.capitalize(fieldName))
                             .nextControlFlow("else")
                             .addStatement("getSharedPreferencesEditor().remove(\$S)", prefKeyName)
-                            .addStatement("put\$LIsNull(true)", StringUtils.capitalize(fieldName))
+                            .addStatement("set\$LIsNull(true)", StringUtils.capitalize(fieldName))
                             .endControlFlow()
                     if (AnnotationUtils.hasNonNullAnnotation(el)) {
                         valueParameterBuilder.addAnnotation(Annotations.NonNull)
@@ -261,49 +261,49 @@ class PreferhythmGenerator(filer: Filer, elements: Elements) : CodeGenerator(fil
                     }
                 }
                 val parameter = valueParameterBuilder.build()
-                val putMethod = putMethodBuilder
+                val setMethod = setMethodBuilder
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Annotations.NonNull)
                         .addParameter(parameter)
                         .addStatement("return this")
                         .returns(generatedClassName)
                         .build()
-                putMethods.add(putMethod)
+                setMethods.add(setMethod)
             }
         }
-        return putMethods
+        return setMethods
     }
 
-    private fun createPutIsNullMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
-        val putIsNullMethods = ArrayList<MethodSpec>()
+    private fun createSetIsNullMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {
+        val setIsNullMethods = ArrayList<MethodSpec>()
         for (el in element.enclosedElements) {
             if (el.getAnnotation(PrefField::class.java) != null) {
                 val fieldName = el.simpleName.toString()
                 val fieldType = ClassName.get(el.asType())
                 val prefKeyNameAnnotation = el.getAnnotation(PrefKeyName::class.java)
                 val prefKeyName = prefKeyNameAnnotation?.value ?: fieldName
-                val putMethodBuilder = MethodSpec.methodBuilder("put" + StringUtils.capitalize(fieldName) + "IsNull")
+                val setMethodBuilder = MethodSpec.methodBuilder("set" + StringUtils.capitalize(fieldName) + "IsNull")
                 if ((fieldType == TypeName.INT.box() ||
                         fieldType == TypeName.LONG.box() ||
                         fieldType == TypeName.FLOAT.box() ||
                         fieldType == TypeName.BOOLEAN.box() ||
                         fieldType == TypeName.get(String::class.java) ||
                         fieldType.javaClass.isInstance(ParameterizedTypeName.get(Set::class.java, String::class.java))) && !fieldType.isPrimitive) {
-                    putMethodBuilder.addStatement("getSharedPreferencesEditor().putBoolean(\$S, value)", prefKeyName + "IsNull")
+                    setMethodBuilder.addStatement("getSharedPreferencesEditor().putBoolean(\$S, value)", prefKeyName + "IsNull")
                 } else {
                     continue
                 }
-                val putIsNullMethod = putMethodBuilder
+                val setIsNullMethod = setMethodBuilder
                         .addModifiers(Modifier.PRIVATE)
                         .addAnnotation(Annotations.NonNull)
                         .addParameter(Boolean::class.javaPrimitiveType, "value")
                         .addStatement("return this")
                         .returns(generatedClassName)
                         .build()
-                putIsNullMethods.add(putIsNullMethod)
+                setIsNullMethods.add(setIsNullMethod)
             }
         }
-        return putIsNullMethods
+        return setIsNullMethods
     }
 
     private fun createRemoveMethods(element: Element, generatedClassName: ClassName): List<MethodSpec> {

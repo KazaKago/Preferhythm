@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPreferencesManager.putStringObject(valueEditText1.getText().toString());
+                myPreferencesManager.setStringObject(valueEditText1.getText().toString());
                 myPreferencesManager.apply();
 
                 valueTextView1.setText(myPreferencesManager.getStringObject());
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myPreferencesManager.putStringObjectNonNull(valueEditText2.getText().toString());
+                myPreferencesManager.setStringObjectNonNull(valueEditText2.getText().toString());
                 myPreferencesManager.apply();
 
                 valueTextView2.setText(myPreferencesManager.getStringObjectNonNull());
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    myPreferencesManager.putIntObject(Integer.valueOf(valueEditText3.getText().toString()));
+                    myPreferencesManager.setIntObject(Integer.valueOf(valueEditText3.getText().toString()));
                     myPreferencesManager.apply();
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    myPreferencesManager.putIntObjectNonNull(Integer.valueOf(valueEditText4.getText().toString()));
+                    myPreferencesManager.setIntObjectNonNull(Integer.valueOf(valueEditText4.getText().toString()));
                     myPreferencesManager.apply();
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
