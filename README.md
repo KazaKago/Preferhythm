@@ -112,17 +112,35 @@ Refer to the sample module ([Java](https://github.com/KazaKago/Preferhythm/tree/
 
 ## Important
 
+### Preferences Name
+
+By default, the SharedPreferences name is **Class Name**.  
+Therefore, if you change the class name, the saved value can not be retrieved.  
+
+If you want to set the SharedPreferences name to an arbitrary value, please add parameters to `@PrefField`.  
+
+```java
+@PrefClass("YOUR_ORIGINAL_PREFERENCES_NAME")
+class YourPreferencesClass {
+
+...
+
+}
+
+```
+
+### Key Name
+
 By default, the key name when saving to SharedPreferences is **Field Name**.  
 Therefore, if you change the field name, the saved value can not be retrieved.  
 
-If you want to set the key name to an arbitrary value, please use `@PrefKeyName` annotation for the field.  
+If you want to set the key name to an arbitrary value, please add parameters to `@PrefField`.  
 
 ```java
 @PrefClass
 class YourPreferencesClass {
 
-    @PrefField
-    @PrefKeyName("YOUR_ORIGINAL_KEY_NAME")
+    @PrefField("YOUR_ORIGINAL_KEY_NAME")
     int yourSaveValue;
 
 }
@@ -130,26 +148,6 @@ class YourPreferencesClass {
 ```
 
 ## Advanced
-
-### Change Preferences Name.
-
-if you want to change Preferences name, extend `[PREFERENCES_MODEL_NAME] + Manager` class and override getPreferencesName() method.
-
-```java
-public class CustomMyPreferencesManager extends MyPreferencesManager {
-
-    public CustomMyPreferencesManager(@NonNull Context context) {
-        super(context);
-    }
-
-    @NonNull
-    @Override
-    protected String getSharedPreferencesName() {
-        return "CUSTOM_SHARED_PREFERENCES_NAME"; // your custom preferences name. (if needed)
-    }
-
-}
-```
 
 ### Override Put and Get Method.
 
