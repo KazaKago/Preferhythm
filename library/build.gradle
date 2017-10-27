@@ -4,8 +4,6 @@ apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
@@ -37,16 +35,11 @@ afterEvaluate {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':annotations')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.android.support:support-annotations:26.1.0'
-    testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-}
-
-repositories {
-    maven { url "https://maven.google.com" }
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':annotations')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:support-annotations:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
