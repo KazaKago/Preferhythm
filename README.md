@@ -19,7 +19,7 @@ Add the following gradle dependency exchanging x.x.x for the latest release.
 
 ```groovy
 dependencies {
-    compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
+    implementation 'com.kazakago.preferhythm:preferhythm:x.x.x'
     annotationProcessor 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
 }
 ```
@@ -30,19 +30,8 @@ dependencies {
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-    compile 'com.kazakago.preferhythm:preferhythm:x.x.x'
+    implementation 'com.kazakago.preferhythm:preferhythm:x.x.x'
     kapt 'com.kazakago.preferhythm:preferhythm-processor:x.x.x'
-}
-```
-
-### Tips
-
-If you have not added the `Google maven repository` to the project, please add the following to the gradle file.  
-This is included by default in project templates for `Android Studio 3.0` and later. [More details](https://developer.android.com/studio/build/dependencies.html#google-maven).  
-
-```
-repositories {
-    google()
 }
 ```
 
