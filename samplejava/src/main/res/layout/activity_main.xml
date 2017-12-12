@@ -19,7 +19,7 @@
             android:text="Nullable String (default value = null)"/>
 
         <EditText
-            android:id="@+id/edit_value_1"
+            android:id="@+id/value1EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>
@@ -30,19 +30,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_set_1"
+                android:id="@+id/set1Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="set"/>
 
             <Button
-                android:id="@+id/button_remove_1"
+                android:id="@+id/remove1Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="remove"/>
 
             <TextView
-                android:id="@+id/text_value_1"
+                android:id="@+id/value1TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -58,7 +58,7 @@
             android:text="NonNull String (default value = foo)"/>
 
         <EditText
-            android:id="@+id/edit_value_2"
+            android:id="@+id/value2EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>
@@ -69,19 +69,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_set_2"
+                android:id="@+id/set2Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="set"/>
 
             <Button
-                android:id="@+id/button_remove_2"
+                android:id="@+id/remove2Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="remove"/>
 
             <TextView
-                android:id="@+id/text_value_2"
+                android:id="@+id/value2TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -97,7 +97,7 @@
             android:text="Nullable Int (default value = null)"/>
 
         <EditText
-            android:id="@+id/edit_value_3"
+            android:id="@+id/value3EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"/>
@@ -108,19 +108,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_set_3"
+                android:id="@+id/set3Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="set"/>
 
             <Button
-                android:id="@+id/button_remove_3"
+                android:id="@+id/remove3Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="remove"/>
 
             <TextView
-                android:id="@+id/text_value_3"
+                android:id="@+id/value3TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -136,7 +136,7 @@
             android:text="NonNull Int (default value = 12)"/>
 
         <EditText
-            android:id="@+id/edit_value_4"
+            android:id="@+id/value4EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"/>
@@ -147,19 +147,19 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_set_4"
+                android:id="@+id/set4Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="set"/>
 
             <Button
-                android:id="@+id/button_remove_4"
+                android:id="@+id/remove4Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="remove"/>
 
             <TextView
-                android:id="@+id/text_value_4"
+                android:id="@+id/value4TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
