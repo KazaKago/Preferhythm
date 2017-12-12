@@ -25,11 +25,10 @@ import javax.tools.Diagnostic;
  * Created by KazaKago on 2017/03/08.
  */
 @AutoService(Processor.class)
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 @SupportedAnnotationTypes({
-        "com.kazakago.preferhythm.PrefClass",
-        "com.kazakago.preferhythm.PrefField",
-        "com.kazakago.preferhythm.PrefKeyName"})
+        "com.kazakago.preferhythm.*",
+})
 public class PreferhythmProcessor extends AbstractProcessor {
 
     private Messager messager;
