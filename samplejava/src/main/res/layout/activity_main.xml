@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="NonNull String (default value = foo)"/>
+            android:text="NonNull String (default value = bar)"/>
 
         <EditText
             android:id="@+id/value2EditText"
